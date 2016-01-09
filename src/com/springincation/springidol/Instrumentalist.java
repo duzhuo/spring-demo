@@ -3,10 +3,12 @@ package com.springincation.springidol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by MrDu on 16/1/7.
  */
+//@Component("kenny")
 public class Instrumentalist implements Performer {
     @Override
     public void perform() throws Exception {
