@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <!--<context:annotation-config/>-->
+    <!--<context:component-scan base-package="com.springincation.springidol" />-->
+
+    <!--<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:config.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="duke" class="com.springincation.springidol.Juggler">
+        <constructor-arg value="15" />
+    </bean>
+
+    <!--<bean id="sonnet29" class="com.springincation.springidol.Sonnet29"/>-->
+
+    <!--<bean id="poeticDuke" class="com.springincation.springidol.PoeticJuggler">-->
+        <!--<constructor-arg value="15"/>-->
+        <!--<constructor-arg ref="sonnet29"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="theStage" class="com.springincation.springidol.Stage" factory-method="getInstance"/>-->
+
+    <!--<bean id="ticket" class="com.springincation.springidol.Ticket" scope="prototype"/>-->
+
+    <!--<bean id="auditorium" class="com.springincation.springidol.Auditorium" init-method="turnOnLights" destroy-method="turnOffLights"/>-->
+
+    <!--<bean id="kenny" class="com.springincation.springidol.Instrumentalist">-->
+        <!--<property name="song" value="Jingle Bells"/>-->
+        <!--<property name="instrument" ref="saxophone"/>-->
+        <!--<property name="instrument" ref="piano"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="kenny2" class="com.springincation.springidol.Instrumentalist">-->
+        <!--&lt;!&ndash;<property name="song" value="Jingle Bells"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="instrument">&ndash;&gt;-->
+            <!--&lt;!&ndash;<bean class="com.springincation.springidol.Piano"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</property>&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--<bean id="kenny2" class="com.springincation.springidol.Instrumentalist" autowire="byName">-->
+        <!--<property name="song" value="Jingle Bells"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="kenny2" class="com.springincation.springidol.Instrumentalist" autowire="byType">-->
+        <!--<property name="song" value="Jingle Bells"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="saxophone" class="com.springincation.springidol.Saxophone" />-->
+    <!--<bean id="piano" class="com.springincation.springidol.Piano"/>-->
+    <!--&lt;!&ndash;<bean id="guitar" class="com.springincation.springidol.Guitar"/>&ndash;&gt;-->
+
+    <!--<bean id="hank" class="com.springincation.springidol.OneManBand">-->
+        <!--<property name="instruments">-->
+            <!--<list>-->
+                <!--<ref bean="saxophone"/>-->
+                <!--&lt;!&ndash;<ref bean="piano"/>&ndash;&gt;-->
+                <!--<ref bean="saxophone"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="hank4map" class="com.springincation.springidol.OneManBand4Map">-->
+        <!--<property name="instruments">-->
+            <!--<map>-->
+                <!--<entry key="SAXOPHONE" value-ref="saxophone"/>-->
+                <!--&lt;!&ndash;<entry key="piano" value-ref="piano"/>&ndash;&gt;-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="carl" class="com.springincation.springidol.Instrumentalist">-->
+        <!--<property name="song" value="#{kenny.song}"/>-->
+        <!--<property name="instrument" value="#{kenny.instrument}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="songSelector" class="com.springincation.springidol.SongSelector"/>-->
+
+    <!--<bean id="carl1" class="com.springincation.springidol.Instrumentalist">-->
+        <!--<property name="song" value="#{songSelector.selectSong()?.toUpperCase()}"/>-->
+        <!--<property name="instrument" value="#{kenny.instrument}"/>-->
+    <!--</bean>-->
+
+    <bean id="audience" class="com.springincation.springidol.Audience"/>
+    <bean id="magician" class="com.springincation.springidol.Magician"/>
+    <bean id="volunteer" class="com.springincation.springidol.Volunteer"/>
+
+    <aop:config>
+        <aop:aspect ref="audience">
+            <!--<aop:before method="taskSeats" pointcut="execution(* com.springincation.springidol.Performer.perform(..))"/>-->
+            <!--<aop:before method="turnOffCellPhones" pointcut="execution(* com.springincation.springidol.Performer.perform(..))"/>-->
+            <!--<aop:after-returning method="applaud" pointcut="execution(* com.springincation.springidol.Performer.perform(..))"/>-->
+            <!--<aop:after-throwing method="demandRefund" pointcut="execution(* com.springincation.springidol.Performer.perform(..))"/>-->
+
+            <aop:pointcut id="performance2" expression="execution(* com.springincation.springidol.Performer.perform(..))"/>
+            <aop:around method="watchPerformance" pointcut-ref="performance2"/>
+        </aop:aspect>
+
+        <aop:aspect ref="magician">
+            <aop:pointcut id="thinking"
+                          expression="execution(* com.springincation.springidol.Thinker.thinkOfSomething(String)) and args(thoughts)"/>
+            <aop:before method="interceptThoughts" pointcut-ref="thinking" arg-names="thoughts"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
