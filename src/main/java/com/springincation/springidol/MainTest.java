@@ -21,6 +21,11 @@ public class MainTest {
         thinker.thinkOfSomething("NEVER GIVE UP! NERVER GIVE UP!");
         System.out.println(magician.getThoughts());
 
+        System.out.println("-----------------------declare-parents----------------------------------------");
+
+        Contestant contestant = (Contestant) context.getBean("duke");
+        contestant.receiveAward();
+
 //        PoeticJuggler poeticJuggler = (PoeticJuggler) context.getBean("poeticDuke");
 //        try {
 //            poeticJuggler.perform();
