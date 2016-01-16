@@ -21,6 +21,20 @@ public class MainTest {
         thinker.thinkOfSomething("NEVER GIVE UP! NERVER GIVE UP!");
         System.out.println(magician.getThoughts());
 
+
+
+
+        System.out.println("-----------------------magician1----------------------------------------");
+
+        Magician1 magician1 = (Magician1) context.getBean("magician1");
+        thinker.thinkOfSomething("magician1 magician1 magician1 magician1");
+        System.out.println(magician1.getThoughts());
+
+
+        System.out.println("-----------------------declare-parents----------------------------------------");
+
+
+
         System.out.println("-----------------------declare-parents----------------------------------------");
 
         Contestant contestant = (Contestant) context.getBean("duke");

@@ -122,4 +122,23 @@
         </aop:aspect>
     </aop:config>
 
+    <aop:aspectj-autoproxy/>
+    <bean id="audience1" class="com.springincation.springidol.Audience1"/>
+    <bean id="magician1" class="com.springincation.springidol.Magician1"/>
+    <bean class="com.springincation.springidol.ContestantIntroducer"/>
+
+    <bean id="criticismEngine" class="com.springincation.springidol.CriticismEngineImpl" >
+        <property name="criticismPool">
+            <list>
+                <value>I'm not being rude, but that was appalling.</value>
+                <value>You may be the least talented person in this show.</value>
+                <value>Do everyont a favor and keep your day job.</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.springincation.springidol.JudgeAspect" factory-method="aspectOf">
+        <property name="criticismEngine" ref="criticismEngine"/>
+    </bean>
+
 </beans>
